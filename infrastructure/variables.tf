@@ -12,3 +12,9 @@ variable "datalake_data_prefix" {
   type    = string
   default = "weather_data"
 }
+
+variable "rapid_api_key" {
+  type        = string
+  description = "Rapid API key for accessing weather data"
+  sensitive   = true
+}
