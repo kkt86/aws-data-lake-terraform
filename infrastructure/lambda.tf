@@ -48,6 +48,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       RAPID_API_KEY = var.rapid_api_key
+      BUCKET_NAME   = aws_s3_bucket.datalake-bucket.bucket
     }
   }
 
@@ -111,6 +112,15 @@ data "aws_iam_policy_document" "lambda_policy_doc" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
     ]
+  }
+
+  statement {
+    sid    = "Stmt1468366974000"
+    effect = "Allow"
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.datalake-bucket.bucket}/*"
+    ]
+    actions = ["s3:*"]
   }
 }
 
