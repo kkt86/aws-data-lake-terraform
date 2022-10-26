@@ -21,6 +21,8 @@ resource "aws_glue_crawler" "open_weather_data_crawler" {
   database_name = "test_crawler"
   role          = aws_iam_role.test_role.arn
 
+  schedule = "cron(0/10 * ? * * *)"
+
   s3_target {
     path = "s3://${var.datalake_s3_bucket_name}/${var.open_weather_prefix}/"
   }
