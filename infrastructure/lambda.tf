@@ -49,6 +49,7 @@ resource "aws_lambda_function" "lambda" {
     variables = {
       RAPID_API_KEY = var.rapid_api_key
       BUCKET_NAME   = aws_s3_bucket.datalake-bucket.bucket
+      DATA_PREFIX   = var.open_weather_prefix
     }
   }
 

@@ -22,8 +22,9 @@ def handler(event, context):
     logger.info(response.text)
 
     bucket_name = os.getenv("BUCKET_NAME")
+    data_prefix = os.getenv("DATA_PREFIX")
     file_name = f"{int(time.time())}.json"
-    s3_path = "open-weather/" + file_name
+    s3_path = f"{data_prefix}/{file_name}"
 
     s3 = boto3.resource("s3")
     s3.Bucket(bucket_name).put_object(Key=s3_path, Body=(bytes(json.dumps(response.json()).encode('UTF-8'))))
